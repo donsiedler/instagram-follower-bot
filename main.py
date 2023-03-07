@@ -5,11 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 
 IG_USERNAME = os.environ.get("IG_USERNAME")
 IG_PASSWORD = os.environ.get("IG_PASSWORD")
-ACCOUNT_NAME = "natgeotravel"
+ACCOUNT_NAME = "chefsteps"
 
 
 class InstaFollower:
@@ -51,7 +52,24 @@ class InstaFollower:
         disable_btn.click()
 
     def find_followers(self):
-        pass
+        self.driver.get(f"https://www.instagram.com/{ACCOUNT_NAME}/")
+
+        time.sleep(2)
+
+        # Open the followers window
+        followers = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[1]/div/div/div/div[1]/div["
+                                                       "1]/div[2]/section/main/div/header/section/ul/li[2]/a")
+        followers.click()
+
+        time.sleep(4)
+
+        # Scroll the followers list
+        followers_list = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div["
+                                                            "1]/div/div[2]/div/div/div/div/div[2]/div/div/div["
+                                                            "2]/div[1]")
+        while True:
+            follow_buttons = followers_list.find_elements(By.TAG_NAME, "button")
+            follow_buttons[-1].send_keys(Keys.END)
 
     def follow(self):
         pass
