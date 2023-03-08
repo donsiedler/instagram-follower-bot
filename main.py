@@ -61,7 +61,7 @@ class InstaFollower:
                                                        "1]/div[2]/section/main/div/header/section/ul/li[2]/a")
         followers.click()
 
-        time.sleep(4)
+        time.sleep(5)
 
         # Scroll the followers list
         followers_list = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div["
@@ -73,7 +73,14 @@ class InstaFollower:
             time.sleep(2)
 
     def follow(self):
-        pass
+        followers_list = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div["
+                                                            "1]/div/div[2]/div/div/div/div/div[2]/div/div/div["
+                                                            "2]/div[1]")
+        follow_buttons = followers_list.find_elements(By.TAG_NAME, "button")
+
+        for btn in follow_buttons:
+            btn.click()
+            time.sleep(1)
 
 
 chrome_options = Options()
