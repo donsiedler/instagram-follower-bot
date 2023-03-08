@@ -67,9 +67,10 @@ class InstaFollower:
         followers_list = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div["
                                                             "1]/div/div[2]/div/div/div/div/div[2]/div/div/div["
                                                             "2]/div[1]")
-        while True:
+        for _ in range(10):
             follow_buttons = followers_list.find_elements(By.TAG_NAME, "button")
             follow_buttons[-1].send_keys(Keys.END)
+            time.sleep(2)
 
     def follow(self):
         pass
